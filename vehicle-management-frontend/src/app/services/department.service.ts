@@ -11,7 +11,7 @@ export interface Department {
   providedIn: 'root'
 })
 export class DepartmentService {
-  private apiUrl = 'http://localhost:8080/api/departments';
+  private apiUrl = 'https://vehicle-management-production-0aa4.up.railway.app/api/departments';
 
   constructor(private http: HttpClient) {}
 

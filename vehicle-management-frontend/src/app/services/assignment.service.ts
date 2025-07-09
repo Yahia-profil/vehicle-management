@@ -15,7 +15,7 @@ export interface Assignment {
   providedIn: 'root'
 })
 export class AssignmentService {
-  private apiUrl = 'http://localhost:8080/api/assignments';
+  private apiUrl = 'https://vehicle-management-production-0aa4.up.railway.app/api/assignments';
 
   constructor(private http: HttpClient) {}
 
