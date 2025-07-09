@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="main-toolbar">
+    <span class="logo">🚗</span>
+    <span class="title">Vehicle Management System</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a mat-button routerLink="/pointeures" routerLinkActive="active-link">Pointeures</a>
+    <a mat-button routerLink="/departments" routerLinkActive="active-link">Departments</a>
+    <a mat-button routerLink="/vehicles" routerLinkActive="active-link">Vehicles</a>
+    <a mat-button routerLink="/assignments" routerLinkActive="active-link">Assignments</a>
+  </mat-toolbar>
+  <div class="main-content colorful-bg">
+    <router-outlet></router-outlet>
+  </div>
+  

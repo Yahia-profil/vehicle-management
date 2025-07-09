@@ -1,0 +1,55 @@
+<h2>Vehicles</h2>
+<form [formGroup]="form" (ngSubmit)="submit()" class="p-form">
+  <mat-form-field appearance="fill">
+    <mat-label>License Plate</mat-label>
+    <input matInput formControlName="licensePlate" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Barcode</mat-label>
+    <input matInput formControlName="barcode" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Department</mat-label>
+    <input matInput [value]="form.value.department?.name || ''" readonly (click)="openSelectDialog()" placeholder="Select department" style="cursor:pointer;">
+    <button mat-icon-button matSuffix type="button" (click)="openSelectDialog()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">
+    <mat-icon>{{ form.value.id ? 'edit' : 'add' }}</mat-icon>
+    {{ form.value.id ? 'Update' : 'Add' }}
+  </button>
+  <button mat-button type="button" (click)="form.reset()" *ngIf="form.value.id">Cancel</button>
+</form>
+
+<table mat-table [dataSource]="vehicles" class="mat-elevation-z8" style="width: 100%;">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let v"> {{v.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="licensePlate">
+    <th mat-header-cell *matHeaderCellDef> License Plate </th>
+    <td mat-cell *matCellDef="let v"> {{v.licensePlate}} </td>
+  </ng-container>
+  <ng-container matColumnDef="barcode">
+    <th mat-header-cell *matHeaderCellDef> Barcode </th>
+    <td mat-cell *matCellDef="let v"> {{v.barcode}} </td>
+  </ng-container>
+  <ng-container matColumnDef="department">
+    <th mat-header-cell *matHeaderCellDef> Department </th>
+    <td mat-cell *matCellDef="let v"> {{v.department?.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let v">
+      <button mat-icon-button color="accent" (click)="edit(v)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete(v.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

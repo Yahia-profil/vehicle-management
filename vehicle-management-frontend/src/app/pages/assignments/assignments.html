@@ -1,0 +1,73 @@
+<div class="form-container">
+  <h2>Assignments</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="p-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Vehicle</mat-label>
+      <input matInput [value]="form.value.vehicle?.licensePlate || ''" readonly (click)="openSelectDialog('vehicle')" placeholder="Select vehicle" style="cursor:pointer;">
+      <button mat-icon-button matSuffix type="button" (click)="openSelectDialog('vehicle')">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Pointeur</mat-label>
+      <input matInput [value]="form.value.pointeur?.name || ''" readonly (click)="openSelectDialog('pointeur')" placeholder="Select pointeur" style="cursor:pointer;">
+      <button mat-icon-button matSuffix type="button" (click)="openSelectDialog('pointeur')">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Department</mat-label>
+      <input matInput [value]="form.value.department?.name || ''" readonly (click)="openSelectDialog('department')" placeholder="Select department" style="cursor:pointer;">
+      <button mat-icon-button matSuffix type="button" (click)="openSelectDialog('department')">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Assignment Date</mat-label>
+      <input matInput formControlName="assignmentDate" type="date" required>
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>{{ form.value.id ? 'edit' : 'add' }}</mat-icon>
+        {{ form.value.id ? 'Update' : 'Add' }}
+      </button>
+      <button mat-button type="button" (click)="form.reset()" *ngIf="form.value.id">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<table mat-table [dataSource]="assignments" class="mat-elevation-z8" style="width: 100%;">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let a"> {{a.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="vehicle">
+    <th mat-header-cell *matHeaderCellDef> Vehicle </th>
+    <td mat-cell *matCellDef="let a"> {{a.vehicle?.licensePlate}} </td>
+  </ng-container>
+  <ng-container matColumnDef="pointeur">
+    <th mat-header-cell *matHeaderCellDef> Pointeur </th>
+    <td mat-cell *matCellDef="let a"> {{a.pointeur?.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="department">
+    <th mat-header-cell *matHeaderCellDef> Department </th>
+    <td mat-cell *matCellDef="let a"> {{a.vehicle?.department?.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="assignmentDate">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let a"> {{a.assignmentDate}} </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let a">
+      <button mat-icon-button color="accent" (click)="edit(a)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete(a.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
