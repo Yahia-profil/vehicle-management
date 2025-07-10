@@ -11,7 +11,7 @@ export interface Pointeur {
   providedIn: 'root'
 })
 export class PointeurService {
-  private apiUrl = 'https://vehicle-management-production-0aa4.up.railway.app/api/pointeures';
+  private apiUrl = 'http://localhost:8080/api/pointeures';
 
   constructor(private http: HttpClient) {}
 

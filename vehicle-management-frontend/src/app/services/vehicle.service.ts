@@ -14,7 +14,7 @@ export interface Vehicle {
   providedIn: 'root'
 })
 export class VehicleService {
-  private apiUrl = 'https://vehicle-management-production-0aa4.up.railway.app/api/vehicles';
+  private apiUrl = 'http://localhost:8080/api/vehicles';
 
   constructor(private http: HttpClient) {}
 
