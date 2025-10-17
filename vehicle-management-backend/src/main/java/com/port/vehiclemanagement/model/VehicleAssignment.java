@@ -16,8 +16,8 @@ public class VehicleAssignment {
     private Vehicle vehicle;
 
     @ManyToOne
-    @JoinColumn(name = "pointeur_id")
-    private Pointeur pointeur;
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     private LocalDate assignmentDate;
 }

@@ -1,13 +1,14 @@
 package com.port.vehiclemanagement.controller;
 
 import com.port.vehiclemanagement.model.Vehicle;
+import com.port.vehiclemanagement.model.VehicleStatisticsDTO;
 import com.port.vehiclemanagement.service.VehicleService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/vehicles")
-@CrossOrigin(origins = "http://localhost:4200")
 public class VehicleController {
     private final VehicleService service;
 
@@ -34,5 +35,10 @@ public class VehicleController {
     public Vehicle update(@PathVariable Long id, @RequestBody Vehicle v) {
         v.setId(id);
         return service.save(v);
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<VehicleStatisticsDTO> getStatistics() {
+        return ResponseEntity.ok(service.getStatistics());
     }
 }

@@ -1,14 +1,42 @@
 .p-form {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 4px 24px rgba(33,150,243,0.10);
+  border-radius: 18px;
+  padding: 32px 24px 16px 24px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.7s;
 }
 mat-form-field {
-  width: 200px;
+  width: 220px;
+  min-width: 160px;
+  flex: 1 1 180px;
+  margin-bottom: 0;
 }
 table {
-  margin-top: 20px;
+  margin-top: 32px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(33,150,243,0.10);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 0.7s;
+}
+tr.mat-row:hover {
+  background: #e3f2fd !important;
+  transition: background 0.2s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
 /* Limit mat-select dropdown height and enable scrollbar for vehicles page only */

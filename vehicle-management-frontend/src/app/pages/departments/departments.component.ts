@@ -46,7 +46,13 @@ export class DepartmentsComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.value.id) {
+    const name = this.form.value.name?.trim().toLowerCase();
+    const id = this.form.value.id;
+    if (this.departments.some(d => d.name.trim().toLowerCase() === name && (!id || d.id !== id))) {
+      this.snackBar.open('Department with this name already exists!', 'Close', { duration: 2000 });
+      return;
+    }
+    if (id) {
       this.departmentService.update(this.form.value).subscribe(() => {
         this.loadDepartments();
         this.form.reset();

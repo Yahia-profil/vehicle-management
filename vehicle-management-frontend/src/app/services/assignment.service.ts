@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Vehicle } from './vehicle.service';
-import { Pointeur } from './pointeur.service';
+import { Employee } from './employee';
 
 export interface Assignment {
   id?: number;
   vehicle: Vehicle;
-  pointeur: Pointeur;
+  employee: Employee;
   assignmentDate: string; // ISO string, e.g. "2024-07-08"
 }
 
@@ -15,7 +15,7 @@ export interface Assignment {
   providedIn: 'root'
 })
 export class AssignmentService {
-  private apiUrl = 'http://localhost:8080/api/assignments';
+  private apiUrl = 'http://localhost:8081/api/assignments';
 
   constructor(private http: HttpClient) {}
 

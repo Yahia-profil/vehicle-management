@@ -1,0 +1,116 @@
+<div class="auth-controls">
+  <button mat-button *ngIf="!isLoggedIn()" (click)="login()">Login</button>
+  <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+  <span *ngIf="isLoggedIn()">Welcome, {{ kc.getUsername() }}!</span>
+</div>
+
+<div class="form-container">
+  <h2>Arrets</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="p-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Shift</mat-label>
+      <mat-select formControlName="shift" required>
+        <mat-option value="SHIFT_1">Shift 1 (07:00–15:00)</mat-option>
+        <mat-option value="SHIFT_2">Shift 2 (15:00–23:00)</mat-option>
+        <mat-option value="SHIFT_3">Shift 3 (23:00–07:00)</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Chef d'escale</mat-label>
+      <mat-select formControlName="chefEscale" required>
+        <mat-option *ngFor="let e of chefEscales" [value]="e">{{e.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Chef d'equipe</mat-label>
+      <mat-select formControlName="chefEquipe" required>
+        <mat-option *ngFor="let e of chefEquipes" [value]="e">{{e.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type" required>
+        <mat-option value="RETARD_ACOSTAGE">Retard à l'accostage</mat-option>
+        <mat-option value="PANNE_VOITURE">Panne voiture</mat-option>
+        <mat-option value="LA_MARREE">La marée</mat-option>
+        <mat-option value="MAUVAIS_TEMPS">Mauvais temps</mat-option>
+        <mat-option value="RETARD_SAISISSAGE_DESAISISSAGE">Retard saisissage/désaisissage</mat-option>
+        <mat-option value="DEHALLAGE">Déhallage</mat-option>
+        <mat-option value="PROBLEME_RAMPE">Problème de la rampe</mat-option>
+        <mat-option value="ARRET_PAR_BORD">Arrêt par le bord</mat-option>
+        <mat-option value="AUTRE">Autre</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput formControlName="date" type="date" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Start Time</mat-label>
+      <input matInput formControlName="startTime" type="time" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>End Time</mat-label>
+      <input matInput formControlName="endTime" type="time" required>
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit" *ngIf="hasChefDEscaleRole()">
+        <mat-icon>{{ form.value.id ? 'edit' : 'add' }}</mat-icon>
+        {{ form.value.id ? 'Update' : 'Add' }}
+      </button>
+      <button mat-button type="button" (click)="form.reset()" *ngIf="form.value.id">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<table mat-table [dataSource]="arrets" class="mat-elevation-z8" style="width: 100%;">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let a"> {{a.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="chefEscale">
+    <th mat-header-cell *matHeaderCellDef> Chef d'escale </th>
+    <td mat-cell *matCellDef="let a"> {{a.chefEscale?.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="chefEquipe">
+    <th mat-header-cell *matHeaderCellDef> Chef d'equipe </th>
+    <td mat-cell *matCellDef="let a"> {{a.chefEquipe?.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <td mat-cell *matCellDef="let a"> {{a.type}} </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let a"> {{a.description}} </td>
+  </ng-container>
+  <ng-container matColumnDef="shift">
+    <th mat-header-cell *matHeaderCellDef> Shift </th>
+    <td mat-cell *matCellDef="let a"> {{a.shift}} </td>
+  </ng-container>
+  <ng-container matColumnDef="startTime">
+    <th mat-header-cell *matHeaderCellDef> Start </th>
+    <td mat-cell *matCellDef="let a"> {{a.startTime}} </td>
+  </ng-container>
+  <ng-container matColumnDef="endTime">
+    <th mat-header-cell *matHeaderCellDef> End </th>
+    <td mat-cell *matCellDef="let a"> {{a.endTime}} </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let a">
+      <button mat-icon-button color="accent" (click)="edit(a)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete(a.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 

@@ -1,0 +1,23 @@
+.stat-card {
+  background: #f5f5f5;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 6px;
+  font-size: 1.2em;
+}
+.stat-section {
+  margin-bottom: 2em;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+th {
+  background: #e0e0e0;
+} 

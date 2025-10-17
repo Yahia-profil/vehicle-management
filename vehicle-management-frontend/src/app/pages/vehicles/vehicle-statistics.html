@@ -1,0 +1,28 @@
+<div *ngIf="loading">Loading statistics...</div>
+<div *ngIf="error">{{ error }}</div>
+<div *ngIf="statistics && !loading && !error">
+  <h2>Vehicle Statistics</h2>
+  <div class="stat-card">
+    <strong>Total Vehicles:</strong> {{ statistics?.totalVehicles }}
+  </div>
+  <div class="stat-section">
+    <h3>By Type</h3>
+    <table>
+      <tr><th>Type</th><th>Count</th></tr>
+      <tr *ngFor="let type of statistics?.vehiclesByType | keyvalue">
+        <td>{{ type.key }}</td>
+        <td>{{ type.value }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="stat-section">
+    <h3>By Status</h3>
+    <table>
+      <tr><th>Status</th><th>Count</th></tr>
+      <tr *ngFor="let status of statistics?.vehiclesByStatus | keyvalue">
+        <td>{{ status.key }}</td>
+        <td>{{ status.value }}</td>
+      </tr>
+    </table>
+  </div>
+</div> 

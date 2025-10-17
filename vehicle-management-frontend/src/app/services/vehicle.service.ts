@@ -8,13 +8,14 @@ export interface Vehicle {
   licensePlate: string;
   barcode: string;
   department: Department;
+  marque?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
-  private apiUrl = 'http://localhost:8080/api/vehicles';
+  private apiUrl = 'http://localhost:8081/api/vehicles';
 
   constructor(private http: HttpClient) {}
 
@@ -36,5 +37,9 @@ export class VehicleService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getStatistics(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/statistics`);
   }
 }

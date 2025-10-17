@@ -1,50 +1,77 @@
 .main-toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
-    color: #fff;
-  }
-  .logo {
-    font-size: 1.7em;
-    margin-right: 12px;
-  }
-  .title {
-    font-weight: bold;
-    font-size: 1.3em;
-    letter-spacing: 1px;
-  }
-  .spacer {
-    flex: 1 1 auto;
-  }
-  .main-toolbar a[mat-button] {
-    color: #fff;
-    font-weight: 500;
-    margin-left: 8px;
-    border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
-  }
-  .main-toolbar a[mat-button]:hover {
-    background: rgba(255,255,255,0.12);
-    color: #ffe082;
-  }
-  .active-link {
-    background: #fff !important;
-    color: #1976d2 !important;
-    font-weight: bold;
-  }
-  .main-content {
-    padding: 32px 16px;
-    max-width: 900px;
-    margin: 0 auto;
-    min-height: 80vh;
-  }
-  .colorful-bg {
-    background: linear-gradient(135deg, #e3f2fd 0%, #fce4ec 100%);
-    min-height: 100vh;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px rgba(33, 150, 243, 0.08);
-  }
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  background: rgba(25, 118, 210, 0.85);
+  box-shadow: 0 4px 24px 0 rgba(33, 150, 243, 0.12);
+  color: #fff;
+  border-radius: 0 0 18px 18px;
+  margin: 0 0 24px 0;
+  padding: 0 24px;
+  backdrop-filter: blur(8px);
+}
+.logo {
+  font-size: 2.2em;
+  margin-right: 18px;
+  filter: drop-shadow(0 2px 8px #fff8);
+}
+.title {
+  font-weight: 900;
+  font-size: 1.6em;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px #1976d2aa;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+.main-toolbar a[mat-button] {
+  color: #fff;
+  font-weight: 600;
+  margin-left: 12px;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1.1em;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+}
+.main-toolbar a[mat-button]:hover {
+  background: #fff;
+  color: #1976d2;
+  box-shadow: 0 4px 16px #90caf9aa;
+}
+.active-link {
+  background: #fff !important;
+  color: #1976d2 !important;
+  font-weight: bold;
+  box-shadow: 0 4px 16px #90caf9aa;
+}
+.main-content {
+  padding: 40px 16px 32px 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+.colorful-bg {
+  background: linear-gradient(135deg, #e0e7ff99 0%, #fbc2eb99 100%);
+  min-height: 100vh;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(33, 150, 243, 0.12);
+  padding: 24px 0;
+}
+.marsa-logo {
+  height: 48px;
+  width: auto;
+  margin-right: 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #1976d2aa;
+  background: #fff;
+  padding: 4px 8px;
+  object-fit: contain;
+  transition: box-shadow 0.2s;
+}
+.marsa-logo:hover {
+  box-shadow: 0 4px 24px #1976d2cc;
+}
   

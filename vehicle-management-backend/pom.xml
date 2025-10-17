@@ -70,6 +70,11 @@
 			<artifactId>javase</artifactId>
 			<version>3.5.2</version>
 		</dependency>
+		<!-- Removed Keycloak Spring Boot Starter for Spring Boot 3.x compatibility -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

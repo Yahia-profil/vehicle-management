@@ -4,6 +4,7 @@ import com.port.vehiclemanagement.model.Department;
 import com.port.vehiclemanagement.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @Service
 public class DepartmentService {
@@ -18,6 +19,12 @@ public class DepartmentService {
     }
 
     public Department save(Department d) {
+        boolean exists = repository.findAll().stream().anyMatch(
+            dep -> dep.getName().equalsIgnoreCase(d.getName()) && (d.getId() == null || !dep.getId().equals(d.getId()))
+        );
+        if (exists) {
+            throw new DataIntegrityViolationException("Department with this name already exists.");
+        }
         return repository.save(d);
     }
 
